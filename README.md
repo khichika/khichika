@@ -1,4 +1,4 @@
-# Hi, I'm Kamil — Robotics & Autonomous Systems Integrator 🚁⚙️
+# Hi, I'm Kamil - Robotics & Autonomous Systems Integrator 🚁⚙️
 
 I specialize in bridging the gap between Edge AI, UAV flight controllers, and Industrial Automation (PLC). My focus is on closed-loop robotic systems, offboard control, and IT/OT integration.
 
