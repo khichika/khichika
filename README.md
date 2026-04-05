@@ -8,6 +8,6 @@ I specialize in bridging the gap between Edge AI, UAV flight controllers, and In
 * **Industrial & AI:** FX3U PLCs, Modbus TCP/RTU, Python, OpenCV, YOLO
 
 ### 🚀 Featured R&D Projects
-1. [**AI-GCS-Offboard-Control**](repo_link) - Neural network-driven Ground Control Station for autonomous UAV tracking.
-2. [**RISCV-Edge-Autonomous-UAV**](repo_link) - Obstacle avoidance and optical flow on a RISC-V companion computer running ROS2.
-3. [**Automated-UAV-Hangar-PLC**](repo_link) - MAVLink-to-Modbus bridge integrating drone telemetry with FX3U industrial infrastructure.
+1. [**AI-GCS-Offboard-Control**](https://github.com/khichika/AI-GCS-Offboard-Control) - Neural network-driven Ground Control Station for autonomous UAV tracking.
+2. [**RISCV-Edge-Autonomous-UAV**](https://github.com/khichika/RISCV-Edge-Autonomous-UAV) - Obstacle avoidance and optical flow on a RISC-V companion computer running ROS2.
+3. [**Automated-UAV-Hangar-PLC**](https://github.com/khichika/Automated-UAV-Hangar-PLC) - MAVLink-to-Modbus bridge integrating drone telemetry with FX3U industrial infrastructure.
