@@ -1,13 +1,68 @@
-# Hi, I'm Kamil - Robotics & Autonomous Systems Integrator 🚁⚙️
+# Hi, I'm Kamil Khichika
 
-I specialize in bridging the gap between Edge AI, UAV flight controllers, and Industrial Automation (PLC). My focus is on closed-loop robotic systems, offboard control, and IT/OT integration.
+Cybersecurity enthusiast, educator and future OT Security specialist from Kazakhstan.
 
-### 🛠 Tech Stack
-* **Robotics & UAV:** PX4, MAVLink, ROS2 (Humble), ExpressLRS
-* **Edge & Hardware:** RISC-V (Orange Pi), STM32, ESP32, I2C/UART/SPI
-* **Industrial & AI:** FX3U PLCs, Modbus TCP/RTU, Python, OpenCV, YOLO
+---
 
-### 🚀 Featured R&D Projects
-1. [**AI-GCS-Offboard-Control**](https://github.com/khichika/AI-GCS-Offboard-Control) - Neural network-driven Ground Control Station for autonomous UAV tracking.
-2. [**RISCV-Edge-Autonomous-UAV**](https://github.com/khichika/RISCV-Edge-Autonomous-UAV) - Obstacle avoidance and optical flow on a RISC-V companion computer running ROS2.
-3. [**Automated-UAV-Hangar-PLC**](https://github.com/khichika/Automated-UAV-Hangar-PLC) - MAVLink-to-Modbus bridge integrating drone telemetry with FX3U industrial infrastructure.
+## About Me
+
+I have a background in Information Systems and currently teach:
+
+- Programming
+- Robotics
+- UAV Technologies
+
+My current focus is cybersecurity, with a long-term interest in:
+
+- Operational Technology (OT) Security
+- Industrial Control Systems (ICS)
+- Red Team Operations
+- Network Security
+- Critical Infrastructure Protection
+- UAV Security
+
+---
+
+## Current Roadmap
+
+### Education
+
+- MSc in CyberSecurity (planned)
+
+### Technical Development
+
+- Linux
+- Python
+- Networking
+- Active Directory
+- Security Research
+
+### Professional Goals
+
+- Build practical cybersecurity projects
+- Participate in security labs and CTFs
+- Earn industry certifications
+- Publish academic research
+- Develop expertise in OT/ICS Security
+
+---
+
+## Areas of Interest
+
+- Industrial Cybersecurity
+- SCADA Security
+- Critical Infrastructure
+- Red Teaming
+- Robotics
+- UAV Systems
+- Embedded Systems
+- Open Source Technologies
+
+---
+
+## Current Mission
+
+Building the knowledge, skills and portfolio required for a career in industrial cybersecurity and critical infrastructure protection.
+
+Learning in public.
+Building in public.
