@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WasteOut — Pitch Deck</title>
+<style>
+  :root {
+    --bg-main: #141615;
+    --card-bg: #1E2220;
+    --card-border: #2E3532;
+    --text-main: #E6E8E6;
+    --text-muted: #9DA5A0;
+    --accent-green: #4E9F6E;
+    --accent-orange: #E07A5F;
+    --accent-kraft: #D4A373;
+    --font-head: 'Trebuchet MS', 'Arial Black', sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .deck-container {
+    width: 92vw;
+    max-width: 1280px;
+    height: 85vh;
+    max-height: 720px;
+    position: relative;
+    background: #181B1A;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    overflow: hidden;
+  }
+
+  .slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 48px 56px;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .slide.active {
+    display: flex;
+  }
+
+  /* Slide Header */
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--card-border);
+    padding-bottom: 16px;
+  }
+
+  .slide-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-kraft);
+    margin-bottom: 4px;
+  }
+
+  .slide-title {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    letter-spacing: -0.5px;
+    color: #FFF;
+  }
+
+  .city-badge {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-green);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Content layouts */
+  .content-grid {
+    display: grid;
+    gap: 20px;
+    flex-grow: 1;
+    margin-top: 24px;
+    align-content: center;
+  }
+
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+  }
+
+  .card-highlight {
+    border-color: var(--accent-green);
+    background: rgba(78, 159, 110, 0.05);
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 14px;
+    stroke: var(--accent-green);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #FFF;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .stat-number {
+    font-family: var(--font-head);
+    font-size: 2.2rem;
+    color: var(--accent-kraft);
+    margin-bottom: 4px;
+  }
+
+  /* Specific Slide 1 Layout */
+  .title-slide {
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 80px;
+    background: linear-gradient(135deg, rgba(30,34,32,1) 0%, rgba(20,22,21,1) 100%);
+  }
+
+  .brand-title {
+    font-family: var(--font-head);
+    font-size: 4.5rem;
+    letter-spacing: -2px;
+    color: #FFF;
+    line-height: 1;
+  }
+
+  .brand-title span {
+    color: var(--accent-green);
+  }
+
+  .brand-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 650px;
+    margin: 20px 0 32px 0;
+    line-height: 1.5;
+  }
+
+  .slogan-box {
+    background: var(--card-bg);
+    border-left: 4px solid var(--accent-kraft);
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-kraft);
+  }
+
+  /* Process Flow Arrow */
+  .step-number {
+    background: var(--accent-green);
+    color: #141615;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  /* Controls Footer */
+  .controls {
+    position: absolute;
+    bottom: 16px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+  }
+
+  .btn {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .btn:hover {
+    background: var(--card-border);
+  }
+
+  .counter {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  /* List items styling */
+  ul.custom-list {
+    list-style: none;
+  }
+
+  ul.custom-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  ul.custom-list li::before {
+    content: "■";
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-size: 0.6rem;
+    top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck-container">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide title-slide active">
+    <div style="position: absolute; top: 40px; right: 56px;" class="city-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+      г. Алматы
+    </div>
+    <div class="slide-tag">Pitch Deck</div>
+    <h1 class="brand-title">Waste<span>Out</span></h1>
+    <p class="brand-subtitle">Экосистема экспресс-вывоза, сортировки и реновации крупногабаритного мусора</p>
+    <div class="slogan-box">
+      "Превращаем отходы ремонта в ценные вторичные ресурсы"
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Problem -->
+  <div class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-tag">Анализ болей</div>
+        <div class="slide-title">Проблема</div>
+      </div>
+    </div>
+    <div class="content-grid grid-3">
+      <div class="card">
+        <svg class="card-icon" style="stroke: var(--accent-orange);" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg>
+        <div class="card-title">Для жителей и бизнеса</div>
+        <div class="card-desc">Сложность поиска исполнителей, непрозрачное ценообразование («на глаз») и отсутствие сервиса при вывозе стройотходов и мебели после ремонта.</div>
+      </div>
+      <div class="card">
+        <svg class="card-icon" style="stroke: var(--accent-orange);" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+        <div class="card-title">Для городской среды</div>
+        <div class="card-desc">Замусоривание дворовых контейнерных площадок, создание стихийных свалок в черте города и бытовой вандализм.</div>
+      </div>
+      <div class="card">
+        <svg class="card-icon" style="stroke: var(--accent-orange);" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="card-title">Экологический ущерб</div>
+        <div class="card-desc">Мебель из ДСП/МДФ вывозится на общие полигоны, выделяя токсины при разложении. <b>До 60% материалов</b> при этом пригодны к повторному использованию.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Solution -->
+  <div class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-tag">Ценностное предложение</div>
+        <div class="slide-title">Решение WasteOut</div>
+      </div>
+    </div>
+    <div class="content-grid grid-3">
+      <div class="card card-highlight">
+        <svg class="card-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        <div class="card-title">Сервис «В один клик»</div>
+        <div class="card-desc">Мгновенный расчет фиксированной стоимости вывоза по фотографии отходов через веб-сервис без скрытых наценок.</div>
+      </div>
+      <div class="card card-highlight">
+        <svg class="card-icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        <div class="card-title">Circular Economy Модель</div>
+        <div class="card-desc">Забор, сортировка, upcycling мебели (покраска, перетяжка) и перефасовка стройматериалов для вторичной реализации.</div>
+      </div>
+      <div class="card card-highlight">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg>
+        <div class="card-title">100% Легальность & B2B</div>
+        <div class="card-desc">Официальная экологическая ответственность с выдачей закрывающих актов утилизации для коммерческих клиентов.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: How It Works -->
+  <div class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-tag">Архитектура сервиса</div>
+        <div class="slide-title">Как работает продукт</div>
+      </div>
+    </div>
+    <div class="content-grid grid-4">
+      <div class="card">
+        <div class="step-number">1</div>
+        <div class="card-title">Оценка и заказ</div>
+        <div class="card-desc">Загрузка фото мусора в веб-сервис. Калькулятор определяет объем и алгоритм фиксирует финальный чек.</div>
+      </div>
+      <div class="card">
+        <div class="step-number">2</div>
+        <div class="card-title">Логистика</div>
+        <div class="card-desc">Экипаж приезжает в течение 2 часов. Грузчики аккуратно спустят отходы с этажа и погрузят в авто.</div>
+      </div>
+      <div class="card">
+        <div class="step-number">3</div>
+        <div class="card-title">Сортировка в цеху</div>
+        <div class="card-desc">Мебель идет на реставрацию. Целые материалы фасуются. Бетон/металл направляются на переработку.</div>
+      </div>
+      <div class="card">
+        <div class="step-number">4</div>
+        <div class="card-title">Реализация</div>
+        <div class="card-desc">Восстановленные товары и материалы продаются через собственный онлайн-каталог и маркетплейсы.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Monetization -->
+  <div class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-tag">Бизнес-модель</div>
+        <div class="slide-title">Источники монетизации</div>
+      </div>
+    </div>
+    <div class="content-grid grid-3">
+      <div class="card">
+        <div class="stat-number">$20–$60</div>
+        <div class="card-title">Логистика (B2C / B2B)</div>
+        <div class="card-desc">Фиксированная плата с заказчика за выезд, спуск с этажа и транспортировку.</div>
+      </div>
+      <div class="card">
+        <div class="stat-number">-40%...-60%</div>
+        <div class="card-title">Продажа Upcycle-мебели</div>
+        <div class="card-desc">Реализация восстановленной мебели со скидкой от стоимости новых аналогов.</div>
+      </div>
+      <div class="card">
+        <div class="stat-number">Вторсырье</div>
+        <div class="card-title">Стройматериалы и Лом</div>
+        <div class="card-desc">Продажа остатков ремонта, сдача лома металлов и бетонного боя под щебень.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Market & Target Audience -->
+  <div class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-tag">Анализ аудитории</div>
+        <div class="slide-title">Рынок и Сегменты</div>
+      </div>
+    </div>
+    <div class="content-grid grid-3">
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        <div class="card-title">B2C Заказчики</div>
+        <ul class="custom-list">
+          <li>Владельцы квартир после ремонта</li>
+          <li>Жильцы при переездах и расхламлении</li>
+          <li>Запрос на аккуратный сервис</li>
+        </ul>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <div class="card-title">B2B Клиенты</div>
+        <ul class="custom-list">
+          <li>Прорабы и ремонтные бригады</li>
+          <li>Управляющие компании (ОСИ/КСК)</li>
+          <li>Офисы, HoReCa, девелоперы</li>
+        </ul>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+        <div class="card-title">Покупатели ресурсов</div>
+        <ul class="custom-list">
+          <li>Студенты и арендаторы жилья</li>
+          <li>Частные мастера и дачники</li>
+          <li>Промышленные переработчики</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: Advantages -->
+  <div class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-tag">Конкурентная отстройка</div>
+        <div class="slide-title">Почему WasteOut?</div>
+      </div>
+    </div>
+    <div class="content-grid grid-3">
+      <div class="card">
+        <div class="card-title" style="color: var(--accent-green); font-size: 1.3rem; margin-bottom: 12px;">01. Прозрачность</div>
+        <div class="card-desc">Фиксированная стоимость по фото до выезда экипажа. В отличие от "серых" перевозчиков, называющих цену по прибытии.</div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: var(--accent-green); font-size: 1.3rem; margin-bottom: 12px;">02. Извлечение ценности</div>
+        <div class="card-desc">Конкуренты вывозят всё на полигон. WasteOut сортирует и возвращает в экономику до <b>60% вывезенного объема</b>.</div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: var(--accent-green); font-size: 1.3rem; margin-bottom: 12px;">03. Сервис «Под ключ»</div>
+        <div class="card-desc">Вежливые грузчики, аккуратный спуск, чистота на площадке и предоставление эко-актов утилизации.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: Traction -->
+  <div class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-tag">Текущие результаты</div>
+        <div class="slide-title">Трэкшн (Traction)</div>
+      </div>
+    </div>
+    <div class="content-grid grid-4">
+      <div class="card">
+        <div class="stat-number">30+</div>
+        <div class="card-title">CustDev интервью</div>
+        <div class="card-desc">Подтвержден высокий спрос на фиксированную оценку по фото среди жителей и прорабов.</div>
+      </div>
+      <div class="card">
+        <div class="stat-number">Unit</div>
+        <div class="card-title">Финмодель</div>
+        <div class="card-desc">Рассчитана экономика цепочки: «забор — сортировка — реновация — маржа».</div>
+      </div>
+      <div class="card">
+        <div class="stat-number">UI/UX</div>
+        <div class="card-title">Прототип</div>
+        <div class="card-desc">Разработан wireframe сервиса оформления заказа и алгоритма калькуляции.</div>
+      </div>
+      <div class="card">
+        <div class="stat-number">Asset-Light</div>
+        <div class="card-title">MVP Логистика</div>
+        <div class="card-desc">Договоренности с частными перевозчиками по модели Uber (без закупки автопарка).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: Economics & Growth -->
+  <div class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-tag">Финансовый план</div>
+        <div class="slide-title">Экономика MVP</div>
+      </div>
+    </div>
+    <div class="content-grid grid-3">
+      <div class="card card-highlight">
+        <div class="slide-tag">Стартовый капитал</div>
+        <div class="stat-number">$6K – $8.8K</div>
+        <div class="card-desc">Аренда цеха, базовый инструмент, IT-инфраструктура и локальный таргетинг.</div>
+      </div>
+      <div class="card card-highlight">
+        <div class="slide-tag">Break-even Point</div>
+        <div class="stat-number">3–4 мес.</div>
+        <div class="card-desc">При объеме 4–6 выездов в день и 10–15 продажах восстановленных позиций в месяц.</div>
+      </div>
+      <div class="card card-highlight">
+        <div class="slide-tag">Окупаемость (ROI)</div>
+        <div class="stat-number">8–10 мес.</div>
+        <div class="card-desc">Возврат инвестиций за счет масштабирования маржи от реновации мебели.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: Goals -->
+  <div class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-tag">Акселератор</div>
+        <div class="slide-title">Цели на программу Almaty Hub</div>
+      </div>
+    </div>
+    <div class="content-grid grid-2">
+      <div class="card">
+        <div class="step-number">1</div>
+        <div class="card-title">Запуск MVP</div>
+        <div class="card-desc">Релиз веб-сервиса и выполнение первых 100+ коммерческих заказов в Алматы.</div>
+      </div>
+      <div class="card">
+        <div class="step-number">2</div>
+        <div class="card-title">Тест гипотез продаж</div>
+        <div class="card-desc">Проверка конверсии и маржинальности вторичной реализации мебели и строительных остатков.</div>
+      </div>
+      <div class="card">
+        <div class="step-number">3</div>
+        <div class="card-title">Операционный плюс</div>
+        <div class="card-desc">Выход на точку безубыточности и подтверждение показателей Unit-экономики.</div>
+      </div>
+      <div class="card">
+        <div class="step-number">4</div>
+        <div class="card-title">Инвестиционный пак</div>
+        <div class="card-desc">Упаковка метрик проекта для привлечения раунда на Demo Day.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="controls">
+    <button class="btn" id="prevBtn">← Назад</button>
+    <div class="counter" id="slideCounter">1 / 10</div>
+    <button class="btn" id="nextBtn">Вперед →</button>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const slideCounter = document.getElementById('slideCounter');
+  let currentSlide = 0;
+
+  function updateSlide(index) {
+    slides.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === index);
+    });
+    slideCounter.textContent = `${index + 1} / ${slides.length}`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlide(currentSlide);
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      updateSlide(currentSlide);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'Space') {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlide(currentSlide);
+      }
+    } else if (e.key === 'ArrowLeft') {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide(currentSlide);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
